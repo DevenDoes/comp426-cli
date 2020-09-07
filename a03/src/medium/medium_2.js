@@ -20,11 +20,15 @@ see under the methods section
  * @param {allCarStats.ratioHybrids} ratio of cars that are hybrids
  */
 export const allCarStats = {
-    avgMpg: undefined,
-    allYearStats: undefined,
-    ratioHybrids: undefined,
+    avgMpg: {
+        'city': (mpg_data.map(x => x.city_mpg).reduce((acc, cur) => acc + cur)) / mpg_data.length,
+        'highway': (mpg_data.map(x => x.highway_mpg).reduce((acc, cur) => acc + cur)) / mpg_data.length,
+    },
+    allYearStats: getStatistics(mpg_data.map(x => x.year)),
+    ratioHybrids: (mpg_data.map(x => x.hybrid).reduce((acc, cur) => acc + cur)) / mpg_data.length,
 };
 
+//console.log(allCarStats);
 
 /**
  * HINT: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
@@ -83,7 +87,88 @@ export const allCarStats = {
  *
  * }
  */
+
+export function makerHybridsFunc(cars) {
+    let makerHybrids = [];
+    cars.filter((car) => {
+        return car.hybrid;
+    }).forEach((car, index) => {
+        let indexMH = makerHybrids.findIndex(x => x.make === car.make)
+        if (indexMH === -1) {
+            makerHybrids.push({
+                'make': car.make,
+                'hybrids': [car.id]
+            });
+        } else {
+            if (!(car.id in makerHybrids[indexMH].hybrids)) {
+                makerHybrids[indexMH].hybrids.push(car.id);
+            }
+        }
+    });
+
+    makerHybrids.sort((a, b) => b.hybrids.length - a.hybrids.length);
+
+    return makerHybrids;
+}
+
+export function avgMpgByYearAndHybridFunc(cars) {
+    const result = {};
+    
+    cars.forEach((car, index) => {
+        if (!result.hasOwnProperty(car.year)) {
+            if (car.hybrid) {
+                result[String(car.year)] = {
+                    'hybrid': {
+                        'count': 1,
+                        'city': car.city_mpg,
+                        'highway': car.highway_mpg,
+                    },
+                    'notHybrid': {
+                        'count': 0,
+                        'city': 0,
+                        'highway': 0,
+                    }
+                };
+            } else {
+                result[String(car.year)] = {
+                    'hybrid': {
+                        'count': 0,
+                        'city': 0,
+                        'highway': 0,
+                    },
+                    'notHybrid': {
+                        'count': 1,
+                        'city': car.city_mpg,
+                        'highway': car.highway_mpg,
+                    }
+                };
+            }
+        } else {
+            if (car.hybrid) {
+                result[String(car.year)].hybrid.count += 1;
+                result[String(car.year)].hybrid.city += car.city_mpg;
+                result[String(car.year)].hybrid.highway += car.highway_mpg;
+            } else {
+                result[String(car.year)].notHybrid.count += 1;
+                result[String(car.year)].notHybrid.city += car.city_mpg;
+                result[String(car.year)].notHybrid.highway += car.highway_mpg;
+            }
+        }
+    });
+
+    for (const [key, value] of Object.entries(result)) {
+        value.hybrid.city /= value.hybrid.count;
+        value.hybrid.highway /= value.hybrid.count;
+        delete value.hybrid.count;
+        value.notHybrid.city /= value.notHybrid.count;
+        value.notHybrid.highway /= value.notHybrid.count;
+        delete value.notHybrid.count;
+    };
+
+    return result;
+}
+
 export const moreStats = {
-    makerHybrids: undefined,
-    avgMpgByYearAndHybrid: undefined
+    makerHybrids: makerHybridsFunc(mpg_data),
+    avgMpgByYearAndHybrid: avgMpgByYearAndHybridFunc(mpg_data),
 };

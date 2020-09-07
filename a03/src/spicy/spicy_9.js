@@ -15,7 +15,11 @@
  *                from calling the function
  */
 export const repeat = (fn, n, ...params) => {
-
+	let values = [];
+	for (let i = 0; i < n; i++) {
+		values.push(fn(...params));
+	}
+	return values
 };
 
 
@@ -24,8 +28,12 @@ export const repeat = (fn, n, ...params) => {
  *   10 times.
  */
 export const repeatDemo = () => {
-
+	repeat((params) => {
+		console.log(params[0]);
+	}, 10, ["Hello, world!"]);
 };
+
+repeatDemo();
 
 
 /**************************************************************************
@@ -41,25 +49,28 @@ export const repeatDemo = () => {
  *   product of num1 and num2.
  */
 export const multiplyBy = (num1) => {
-
+	return (num2) => num1 * num2;
 };
 
+// console.log(multiplyBy(4)(8));
 
 /**
  * Use the multiplyBy function to create and export a function named
  *   "tenTimes" that multiplies a number by 10.
  */
-export const tenTimes = undefined;
+export const tenTimes = (num) => multiplyBy(num)(10);
 
+// console.log(tenTimes(4));
 
 /**
  * Write and export a function named "tenTimesFifty" which uses the tenTimes
  *   function to multiply 50 by 10 and returns the result.
  */
 export const tenTimesFifty = () => {
-
+	return tenTimes(50);
 };
 
+// console.log(tenTimesFifty());
 
 /**************************************************************************
  *
@@ -85,9 +96,14 @@ export const tenTimesFifty = () => {
  *    everyEven([1, 1, 0, 1, 1], x => x === 1)  <--  returns false
  */
 export const everyEven = (arr, test) => {
-
+	for (let i = 0; i < arr.length; i+=2) {
+		if (!test(arr[i])) return false;
+	}
+	return true;
 };
 
+// console.log(everyEven([1, 5, 1, 0, 1], x => x === 1));
+// console.log(everyEven([1, 1, 0, 1, 1], x => x === 1));
 
 /**
  * Write and export a function named "someEven" which takes an array and a test
@@ -109,9 +125,16 @@ export const everyEven = (arr, test) => {
  *    someEven([0, 0, 0, 0, 0], x => x === 0)  <--  returns true
  */
 export const someEven = (arr, test) => {
-
+	for (let i = 0; i < arr.length; i+=2) {
+		if (test(arr[i])) return true;
+	}
+	return false;
 };
 
+// console.log(someEven([4, 3, 2, 1, 0], x => x === 3));
+// console.log(someEven([1, 0, 1, 0, 1], x => x === 0));
+// console.log(someEven([1, 1, 1, 1, 0], x => x === 0));
+// console.log(someEven([0, 0, 0, 0, 0], x => x === 0));
 
 /**
  * Write and export a function named "filter" which takes an array and a test
@@ -135,9 +158,19 @@ export const someEven = (arr, test) => {
  *       -->  { pass: [1, 5, 31], fail: [90] }
  */
 export const filter = (arr, test) => {
-
+	let result = {
+		'pass': [],
+		'fail': [],
+	};
+	for (let i = 0; i < arr.length; i++) {
+		if (test(arr[i])) result.pass.push(arr[i]);
+		else result.fail.push(arr[i]);
+	}
+	return result;
 };
 
+// console.log(filter(['yes', 'nope', 'maybe', 'yellow'], x => x[0] === 'y'));
+// console.log(filter([1, 90, 5, 31], x => x % 2 === 1));
 
 /**
  * Write and export a function named "allEvensAreOdd" which takes as input an
@@ -145,8 +178,11 @@ export const filter = (arr, test) => {
  *   odd numbers. Use the "everyEven" function in this function.
  */
 export const allEvensAreOdd = (arr) => {
-
+	return everyEven(arr, x => x % 2 === 1);
 };
+
+// console.log(allEvensAreOdd([1,2,3,4,5,6]));
+// console.log(allEvensAreOdd([1,2,3,4,4,6]));
 
 
 /**
@@ -155,9 +191,11 @@ export const allEvensAreOdd = (arr) => {
  *   array is an odd number. Use the "someEven" function in this function.
  */
 export const anEvenIsOdd = (arr) => {
-
+	return someEven(arr, x => x % 2 === 1);
 };
 
+// console.log(anEvenIsOdd([2,2,4,4,6,6]));
+// console.log(anEvenIsOdd([2,2,4,4,5,6]));
 
 /**
  * Write and export a function named "hasExactly" which takes an array, a test
@@ -166,5 +204,12 @@ export const anEvenIsOdd = (arr) => {
  *   pass the test. You must use the filter function.
  */
 export const hasExactly = (arr, test, n) => {
-
+	return filter(arr, test).pass.length === n;
 };
+
+// console.log(hasExactly(['yes', 'nope', 'maybe', 'yellow'], x => x[0] === 'y', 1));
+// console.log(hasExactly(['yes', 'nope', 'maybe', 'yellow'], x => x[0] === 'y', 2));
+// console.log(hasExactly(['yes', 'nope', 'maybe', 'yellow'], x => x[0] === 'y', 3));
+// console.log(hasExactly([1, 90, 5, 31], x => x % 2 === 1, 2));
+// console.log(hasExactly([1, 90, 5, 31], x => x % 2 === 1, 3));
+// console.log(hasExactly([1, 90, 5, 31], x => x % 2 === 1, 4));

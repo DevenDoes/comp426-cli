@@ -6,7 +6,10 @@
  * returns: { type: 'number', value: 4 }
  */
 export function identifyVariable(variable) {
-
+   return {
+      'type': (typeof variable),
+      'value': variable,
+   };
 }
 
 
@@ -24,7 +27,14 @@ export function identifyVariable(variable) {
 
  */
 export function identifyArray(array) {
-
+   let id = []
+   array.forEach((item, index) => {
+      id.push({
+         'type': (typeof item),
+         'value': item,
+      });
+   });
+   return id;
 }
 
 /**
@@ -44,7 +54,7 @@ export function identifyArray(array) {
  obj now does not contain the `password` field
  */
 export function removeKey(object, key) {
-
+   delete object[String(key)];
 }
 
 /**
@@ -64,7 +74,9 @@ export function removeKey(object, key) {
  If only `removeKeyNonDestructive` was called, nothing would have changed.
  */
 export function removeKeyNonDestructive(object, key) {
-
+   const objectCopy = {...object};
+   delete objectCopy[String(key)];
+   return objectCopy;
 }
 
 /**
@@ -89,5 +101,43 @@ export function removeKeyNonDestructive(object, key) {
  * @return {*} The object with its keys removed.
  */
 export function removeKeys(object, keyList) {
-
+   const objectCopy = {...object};
+   keyList.forEach((item, index) => {
+      delete objectCopy[String(item)];
+   })
+   return objectCopy;
 }
+
+// console.log(identifyVariable(4));
+// console.log('---------------');
+// console.log(identifyArray(['some', 3, [3, 4], false]));
+// console.log('---------------');
+// let obj1 = {
+//    name: 'Mr. Boss',
+//    title: 'boss',
+//    age: 33,
+//    password: 'pass123'
+// };
+// console.log(obj1);
+// console.log(removeKey(obj1, 'password'));
+// console.log(obj1);
+// console.log('---------------');
+// let obj2 = {
+//    name: 'Mr. Boss',
+//    title: 'boss',
+//    age: 33,
+//    password: 'pass123'
+// };
+// console.log(obj2);
+// console.log(removeKeyNonDestructive(obj2, 'password'));
+// console.log(obj2);
+// console.log('---------------');
+// let obj3 = {
+//    name: 'Mr. Boss',
+//    title: 'boss',
+//    age: 33,
+//    password: 'pass123'
+// };
+// console.log(obj3);
+// console.log(removeKeys(obj3, ['password', 'age']));
+// console.log(obj3);
