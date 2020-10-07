@@ -40,31 +40,36 @@ export async function getTwoHeroes(heroData, hero1Id, hero2Id) {
  */
 export async function getTwoHeroesSolution(heroData, hero1Id, hero2Id) {
 
+  return await Promise.all([
+    getHeroByIdAsync(heroData, hero1Id),
+    getHeroByIdAsync(heroData, hero2Id)
+  ]);
+
 }
 
 
 // Uncomment this code to locally run your getTwoHeroesSolution() function
-/*
-async function run() {
-  const t0 = performance.now();
-  const result = await getTwoHeroes(heroData, 2, 3);
-  const t1 = performance.now();
 
-  console.log(`slow version finished in ${Math.round(t1 - t0)}ms`); // should be about 3000ms
-  console.log(result);
-}
+// async function run() {
+//   const t0 = performance.now();
+//   const result = await getTwoHeroes(heroData, 2, 3);
+//   const t1 = performance.now();
+//
+//   console.log(`slow version finished in ${Math.round(t1 - t0)}ms`); // should be about 3000ms
+//   console.log(result);
+// }
+//
+// run();
+//
+// async function runSolution() {
+//   const t0 = performance.now();
+//   let result = await getTwoHeroesSolution(heroData, 2, 3);
+//   const t1 = performance.now();
+//
+//   console.log(`fast version finished in ${Math.round(t1 - t0)}ms`); // should be about 1500ms
+//   console.log(result);
+// }
+//
+// runSolution();
 
-run();
-
-async function runSolution() {
-  const t0 = performance.now();
-  let result = await getTwoHeroesSolution(heroData, 2, 3);
-  const t1 = performance.now();
-
-  console.log(`fast version finished in ${Math.round(t1 - t0)}ms`); // should be about 1500ms
-  console.log(result);
-}
-
-runSolution();
-*/
 

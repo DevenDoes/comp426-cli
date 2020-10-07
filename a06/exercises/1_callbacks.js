@@ -21,19 +21,18 @@ import { heroData } from "./data";
  * @returns  This function need not return anything
  */
 export function getHeroByIdCallback(heroData, id, callback) {
-  // 1. Find the hero with the correct id in the heroData array
 
-  // 2. Use setTimeout() to execute code after 1.5 seconds. See the assignment
-  //    write-up for instructions of how to use setTimeout().
+    let hero = heroData.find(hero => hero.id === id);
 
-  // 3. After 1.5 seconds, execute the callback() function, passing in the hero
-  //    with the correct id as a parameter to the function.
+    setTimeout(() => {
+        callback(hero);
+    }, 1500);
+
 }
 
 
 // Uncomment this code to locally run your getHeroByIdCallback() function
-/*
-getHeroByIdCallback(heroData, 2, (hero) => {
-    console.log(`Found the hero with id ${hero.id}`, hero);
-});
-*/
+
+// getHeroByIdCallback(heroData, 2, (hero) => {
+//     console.log(`Found the hero with id ${hero.id}`, hero);
+// });
