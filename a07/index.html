@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css">
+    <title>2048</title>
+</head>
+<body>
+    <div id="background">
+        <section id="modal" class="hidden">
+            <h1></h1>
+            <p></p>
+            <button class="newGame">New Game</button>
+        </section>
+        <section id="wrapper">
+            <header>
+                <h1 id="score">Score: 0</h1>
+                <button class="newGame" type="button">New Game</button>
+            </header>
+            <article id="board">
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+                <div class="tile">0</div>
+            </article>
+        </section>
+    </div>
+    <script src="./engine/game.js" type="module"></script>
+    <script src="./app.js" type="module"></script>
+</body>
+</html>

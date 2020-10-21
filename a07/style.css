@@ -1,0 +1,175 @@
+body {
+    margin: 0;
+    padding: 0;
+    border-collapse: separate;
+}
+
+#background {
+    background-color: #e9ecee;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal {
+    position: absolute;
+    width: 80vh;
+    height: 80vh;
+    z-index: 50;
+    background-color: #fca311;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal h1 {
+    font-family: "Arial Black", serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+#modal p {
+    font-family: "Arial Black", serif;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+#modal button {
+    display: block;
+    font-family: "Arial Black", serif;
+    font-size: 1rem;
+    background-color: #4B9CD3;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 2rem 1rem;
+    border-radius: 0.25rem;
+}
+
+#modal button:hover {
+    background-color: #303030;
+    color: #ffffff;
+}
+
+#wrapper {
+    height: 80vh;
+    width: 80vh;
+    background: #fcfcfc;
+    border-radius: 0.25rem;
+    border-collapse: separate;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    height: 4rem;
+    padding: 1rem;
+    background-color: #4B9CD3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.25rem 0.25rem 0 0;
+}
+
+header h1 {
+    font-family: "Arial Black", serif;
+    font-size: 2rem;
+    margin: 0 1rem;
+    color: #ffffff;
+}
+
+header button {
+    display: block;
+    font-family: "Arial Black", serif;
+    font-size: 1rem;
+    background-color: #fca311;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0 1rem;
+    border-radius: 0.25rem;
+}
+
+header button:hover {
+    background-color: #303030;
+    color: #ffffff;
+}
+
+#board {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    height: 100%;
+    margin: 1rem;
+    border: #303030;
+}
+
+#board .tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Arial Black", serif;
+    font-size: 2rem;
+    color: #ffffff;
+    border-radius: 0.25rem;
+}
+
+.tile-0 {
+    background-color: #041F1E;
+}
+
+.tile-2 {
+    background-color: #1446A0;
+}
+
+.tile-4 {
+    background-color: #DB3069;
+}
+
+.tile-8 {
+    background-color: #F5D547;
+}
+
+.tile-16 {
+    background-color: #659157;
+}
+
+.tile-32 {
+    background-color: #FF7F11;
+}
+
+.tile-64 {
+    background-color: #07A0C3;
+}
+
+.tile-128 {
+    background-color: #06D6A0;
+}
+
+.tile-256 {
+    background-color: #590004;
+}
+
+.tile-512 {
+    background-color: #A682FF;
+}
+
+.tile-1024 {
+    background-color: #F2A359;
+}
+
+.tile-2048 {
+    background-color: #EEE5E9;
+}
+
+.visible {
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}

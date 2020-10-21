@@ -1,4 +1,4 @@
-export default class Game {
+class Game {
 
     constructor(dimension) {
         this.dimension = dimension;
@@ -75,8 +75,6 @@ export default class Game {
                     // If the current tile is empty and the next tile is not empty
                     if (this.gameState.board[currentIndex] === 0
                         && this.gameState.board[nextIndex] !== 0) {
-                        // console.log(`Curr Loc: ${currentIndex}, Curr Val: ${this.gameState.board[currentIndex]}`);
-                        // console.log(`Next Loc: ${nextIndex}, Next Val: ${this.gameState.board[nextIndex]}`);
                         // Replace the current tile with the next tile
                         this.gameState.board[currentIndex] = this.gameState.board[nextIndex];
                         // Make the next tile empty
@@ -191,16 +189,12 @@ export default class Game {
                     // If the current tile is empty and the next tile is not empty
                     if (this.gameState.board[currentIndex] === 0
                         && this.gameState.board[nextIndex] !== 0) {
-                        // console.log(`Curr Loc: ${currentIndex}, Curr Val: ${this.gameState.board[currentIndex]}`);
-                        // console.log(`Next Loc: ${nextIndex}, Next Val: ${this.gameState.board[nextIndex]}`);
                         return false;
                     }
                     // If the current tile and next tile are not empty and are equal
                     else if (this.gameState.board[currentIndex] !== 0
                         && this.gameState.board[nextIndex] !== 0
                         && this.gameState.board[currentIndex] === this.gameState.board[nextIndex]) {
-                        // console.log(`Curr Loc: ${currentIndex}, Curr Val: ${this.gameState.board[currentIndex]}`);
-                        // console.log(`Next Loc: ${nextIndex}, Next Val: ${this.gameState.board[nextIndex]}`);
                         return false;
                     }
                     // If the current tile and the next tile are not empty and are not equal
@@ -285,3 +279,5 @@ export default class Game {
     }
 
 }
+
+export { Game };
