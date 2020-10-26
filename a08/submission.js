@@ -6,11 +6,9 @@
  * This script uses axios to make simple HTTP requests to the COMP 426 server
  */
 
-
-
 /**
  * This function should use axios to make a GET request to the following url:
- *   https://comp426fa19.cs.unc.edu/a08/heroes
+ *   https://comp426fa20.cs.unc.edu/a08/heroes
  *
  * The axios request should be "await"ed, and once the response is available,
  *   the body of the HTTP response (which is in JSON format) should be returned
@@ -19,13 +17,17 @@
  * @returns  {Object}  The body of the HTTP response.
  */
 export async function fn1() {
-
+    const result = await axios({
+        method: 'get',
+        url: 'https://comp426-1fa20.cs.unc.edu/a08/heroes'
+    });
+    return result.data;
 };
 
 
 /**
  * Like fn1(), this function should use axios to make a GET request to the
- *   following url: https://comp426fa19.cs.unc.edu/a08/heroes
+ *   following url: https://comp426fa20.cs.unc.edu/a08/heroes
  *
  * However, this function should pass the following GET parameter to the server:
  *   { sort: 'first ASC' }
@@ -39,13 +41,20 @@ export async function fn1() {
  * @returns  {Number}  The HTTP status code of the response.
  */
 export async function fn2() {
-
+    const result = await axios({
+        method: 'get',
+        url: 'https://comp426-1fa20.cs.unc.edu/a08/heroes',
+        params: {
+            sort: 'first ASC'
+        }
+    });
+    return result.status;
 };
 
 
 /**
  * This function should use axios to make a POST request to the following url:
- *   https://comp426fa19.cs.unc.edu/a08/users
+ *   https://comp426fa20.cs.unc.edu/a08/users
  *
  * The POST HTTP verb is conventionally used when instructing the server to
  *   create a new record in the database. The new record's data is traditionally
@@ -70,7 +79,16 @@ export async function fn2() {
  * @returns  {Object}  The complete axios response object
  */
 export async function fn3() {
-  
+    const result = await axios({
+        method: 'post',
+        url: 'https://comp426-1fa20.cs.unc.edu/a08/users',
+        data: {
+            first: 'Deven',
+            last:  'Jahnke',
+            onyen: 'jahnkedk',
+        }
+    });
+    return result;
 };
 
 
@@ -92,13 +110,24 @@ export async function fn3() {
  *                     request fails
  */
 export async function fn4() {
-  
+    try {
+        const result = await axios({
+            method: 'post',
+            url: 'https://comp426-1fa20.cs.unc.edu/a08/users',
+            data: {
+                first: 'Deven',
+                last: 'Jahnke',
+            }
+        });
+    } catch (error) {
+        return error;
+    }
 };
 
 
 /**
  * This function should use axios to make a PUT request to the following url:
- *   https://comp426fa19.cs.unc.edu/a08/headers
+ *   https://comp426fa20.cs.unc.edu/a08/headers
  *
  * No parameters should be sent with the request, but instead a special HTTP
  *   request header should be added to your request named
@@ -110,13 +139,20 @@ export async function fn4() {
  * @returns  {Object}  The complete axios response object
  */
 export async function fn5() {
-  
+    const result = await axios({
+        method: 'put',
+        url: 'https://comp426-1fa20.cs.unc.edu/a08/headers',
+        headers: {
+            'my-custom-request-header': 'Hello, World!'
+        }
+    });
+    return result;
 };
 
 
 /**
  * This function should use axios to make a GET request to the following url:
- *   https://comp426fa19.cs.unc.edu/a08/headers
+ *   https://comp426fa20.cs.unc.edu/a08/headers
  *
  * No parameters should be sent with the request.
  *
@@ -131,5 +167,9 @@ export async function fn5() {
  *   "my-custom-response-header"
  */
 export async function fn6() {
-  
+    const result = await axios({
+        method: 'get',
+        url: 'https://comp426-1fa20.cs.unc.edu/a08/headers',
+    });
+    return result.headers['my-custom-response-header'];
 };
